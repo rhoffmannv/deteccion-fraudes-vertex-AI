@@ -26,7 +26,7 @@ A grandes rasgos el proyecto se divide en:
     - Con petición REST
     - Con cliente de Google (CLI)
    
-## Importación de datos
+# Importación de datos
 
 Código en el *notebook* **Obtener Data.ipynb** con líneas de código explicadas en detalle.
 
@@ -51,6 +51,53 @@ Se crea copia de tabla y se agregan dos columnas importantes:
 - transaction_id: Identificador único para cada fila (transacción bancaria)
 - splits: Asignar a cada instancia conjunto de entrenamiento, validación o test.
 
-## Modelo en TensorFlow
+# Modelo en TensorFlow
 
-Código en el *notebook* **Modelo en Vertex AI.ipynb** con líneas de código explicadas en detalle.
+Código en el *notebook* **Modelo en Vertex AI.ipynb** con código explicado en detalle.
+
+### Creación de modelo
+
+Se crea modelo de regresión logística:
+
+- Definición de funciones auxiliares:
+  - Se crea función que separa datos entre features/etiqueta y codifica en One-Hot las etiquetas.
+  - Se crea función que lee batches de datos desde la tabla de BigQuery usando Tensorflow I/O (se configura para leer data en paralelo para acelerar el entrenamiento)
+- Se definen los inputs del modelo.
+- Se usa Batch Normalization para normalizar datos.
+- Se construye modelo de regresión logistica en TensorFlow con función de activación *softmax*.
+- Se compila el modelo.
+
+### Entrenamiento del modelo
+- Entrenar modelo con método *fit*.
+- El entrenamiento se lleva a cabo en la maquina local.
+- Se guarda el modelo entrenado.
+
+### Evaluación del modelo
+- Se visualizan las curvas de entrenamiento y validación con Tensorboard.
+- Se evalua el poder de generalización del modelo usando los datos de prueba.
+- Se calculan diversas métricas, como *accuracy* y *loss*.
+
+# *Endpoint* en Vertex AI
+
+Código en el *notebook* **Modelo en Vertex AI.ipynb** con código explicado en detalle.
+
+## Creación de *endpoint*
+
+### Registrar modelo en Vertex AI
+- Verificar que modelo no haya sido agregado anteriormente.   
+- Agregar modelo a registro de Vertex AI.
+
+### Crear endpoint para obtener predicciones en línea
+- Verificar si *endpoint* ya existe.   
+- Crear *endpoint* (vacio por el momento).
+
+### Desplegar modelo a endpoint
+- Agregar modelo en registro de Vertex AI al *endpoint* creado.
+
+## Prueba de *endpoint*
+
+Se extraen 10 datos del conjunto de *test* para hacer predicciones utilizando el *endpoint* implementado.  
+Se usan tres métodos distintos para hacer peticiones de predicciones en línea:
+- Usando cliente Python
+- Usando petición REST
+- Usando Google Cloud (CLI)
