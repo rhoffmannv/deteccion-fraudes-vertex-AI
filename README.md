@@ -1,5 +1,5 @@
 # Detección de Fraudes Bancarios
-- En este proyecto se implementa en Vertex AI un modelo de regresión logística para predecir fraudes bancarios.
+- En este proyecto se implementa en Vertex AI un modelo de regresión logística para detectar transferencias bancarías fraudulentas.
 - Se utilizan diversas herramientas de Google Cloud Platform (GCP) para el desarrollo:
   - Google Storage: Para almacenar archivo *.csv* con los datos.
   - BigQuery: Para crear tabla a partir de archivo *.csv* y luego alimentar con datos de entrenamiento al modelo de TensorFlow.
