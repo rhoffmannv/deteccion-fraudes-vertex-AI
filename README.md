@@ -2,11 +2,11 @@
 - En este proyecto se implementa en Vertex AI un modelo de regresión logística para predecir fraudes bancarios.
 - Se utilizan diversas herramientas de Google Cloud Platform (GCP) para el desarrollo:
   - Google Storage: Para almacenar archivo *.csv* con los datos.
-  - BigQuery: Para crear tabla a partir de archivo *.csv* y luego alimentarcon datos de entrenamiento modelo de TensorFlow.
+  - BigQuery: Para crear tabla a partir de archivo *.csv* y luego alimentar con datos de entrenamiento al modelo de TensorFlow.
   - Vertex AI: Para implemetar el modelo como API, capaz de recibir peticiones vía internet y entregar predicciones en tiempo real.
 - El proyecto esta compuesto por dos *jupyter notebooks*:
   - **Obtener Data.ipynb**: Donde se descarga *dataset* en formato  *.csv* a bucket en GS.
-  - **Modelo en Vertex AI.ipynb**: Donde se crea modelo con TensorFlow, se entrena con datos comunicandose con tabla de BigQuery y se implementa modelo entrenado en *endpoint* de Vertex AI para recibir peticiones y entregar predicciones en línea.
+  - **Modelo en Vertex AI.ipynb**: Donde se crea modelo con TensorFlow, se entrena con datos comunicandose con tabla de BigQuery y se implementa modelo entrenado en *endpoint* de Vertex AI, para recibir peticiones y entregar predicciones en línea.
  
 # Detalles del Proyecto
 
@@ -61,19 +61,19 @@ Se crea modelo de regresión logística:
 
 - Definición de funciones auxiliares:
   - Se crea función que separa datos entre features/etiqueta y codifica en One-Hot las etiquetas.
-  - Se crea función que lee batches de datos desde la tabla de BigQuery usando Tensorflow I/O (se configura para leer data en paralelo para acelerar el entrenamiento)
+  - Se crea función que lee *batches* de datos desde la tabla de BigQuery usando Tensorflow I/O (se configura para leer data en paralelo para acelerar el entrenamiento)
 - Se definen los inputs del modelo.
 - Se usa Batch Normalization para normalizar datos.
 - Se construye modelo de regresión logistica en TensorFlow con función de activación *softmax*.
 - Se compila el modelo.
 
 ### Entrenamiento del modelo
-- Entrenar modelo con método *fit*.
+- Se entrena el modelo con método *fit*.
 - El entrenamiento se lleva a cabo en la maquina local.
 - Se guarda el modelo entrenado.
 
 ### Evaluación del modelo
-- Se visualizan las curvas de entrenamiento y validación con Tensorboard.
+- Se visualizan las curvas de entrenamiento y de validación con Tensorboard.
 - Se evalua el poder de generalización del modelo usando los datos de prueba.
 - Se calculan diversas métricas, como *accuracy* y *loss*.
 
@@ -92,7 +92,7 @@ Código en el *notebook* **Modelo en Vertex AI.ipynb** con código explicado en 
 - Crear *endpoint* (vacio por el momento).
 
 ### Desplegar modelo a endpoint
-- Agregar modelo en registro de Vertex AI al *endpoint* creado.
+- Agregar modelo ya registrado en Vertex AI al *endpoint* creado.
 
 ## Prueba de *endpoint*
 
